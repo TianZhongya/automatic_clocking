@@ -6,7 +6,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    redirect: '/addUser',
     name: 'Home',
+    meta: {
+      title: '无情的打卡机器'
+    },
     component: () =>
       import('../views/Home'),
     children: [

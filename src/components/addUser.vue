@@ -1,8 +1,8 @@
 <template>
   <el-card>
     <el-form :inline="true" :model="userForm" class="demo-form-inline">
-      <el-form-item label="学号">
-        <el-input v-model="userForm.username" placeholder=学号></el-input>
+      <el-form-item label="账号">
+        <el-input v-model="userForm.username" placeholder=账号></el-input>
       </el-form-item>
       <el-form-item label="密码">
         <el-input v-model="userForm.password" placeholder=密码></el-input>
