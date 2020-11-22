@@ -2,7 +2,9 @@
   <el-card>
     <el-form :inline="true" :model="userForm" class="demo-form-inline">
       <el-form-item label="账号">
-        <el-input v-model="userForm.username" placeholder=账号></el-input>
+        <el-input v-model="userForm.username" placeholder=校内邮箱号>
+          <template slot="append">@jlu.edu.cn</template>
+        </el-input>
       </el-form-item>
       <el-form-item label="密码">
         <el-input v-model="userForm.password" placeholder=密码></el-input>
@@ -41,6 +43,11 @@
         <el-button type="primary" @click="onSubmit">添加</el-button>
       </el-form-item>
     </el-form>
+    <el-alert
+      title="请确保账户密码填写正确，打卡成功会有邮件提醒"
+      type="warning"
+      show-icon>
+    </el-alert>
   </el-card>
 </template>
 
@@ -898,8 +905,13 @@ export default {
     },
     onSubmit () {
       this.$axios.post('api/users', this.userForm)
-        .then(
-          this.$message.success('添加成功')
+        .then(data => {
+          if (data.status >= 200 && data.status < 300) { this.$message.success('添加成功') }
+        })
+        .catch(error => {
+          this.$message.error('登录失败，请检查账号密码')
+          console.log(error)
+        }
         )
     }
   }
